@@ -1,0 +1,15 @@
+{
+  "name": "u235-astrolib",
+  "version": "1.0.0",
+  "description": "A useful node/browser library for astrophotographers and astronomers",
+  "keywords": ["node", "browser", "astro", "astronomy", "astrophotography"],
+  "homepage": "https://u235.herokuapp.com/index.html",
+  "bugs": "https://github.com/oopfan/u235-astrolib/issues",
+  "main": "index.js",
+  "repository": {
+    "url": "https://github.com/oopfan/u235-astrolib",
+    "type": "git"
+  },
+  "author": "B.Morgan",
+  "license": "MIT"
+}
