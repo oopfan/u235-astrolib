@@ -7,25 +7,35 @@ Modules:
 
 Install via
 
+- `npm install u235-astrolib`
 - `yarn add u235-astrolib`
+
+Differences between major version 1 and 2:
+- The browser namespace was changed from `u235Astrolib` to `U235Astrolib`.
+- The name of the exported function was changed from `lrgbExposureCalculator` to `LrgbExposureCalculator`.
+- The `create()` instance method was replaced by the constructor function `LrgbExposureCalculator`.
 
 ## Basic Examples
 ##### Node Example
 ```javascript
-var calc = require('u235-astrolib/lrgb-exposure-calculator').create();
+var Calc = require('u235-astrolib/lrgb-exposure-calculator');
+var calc = new Calc();
 ```
 ##### Browser Example
 ```html
 <script src="node_modules/u235-astrolib/lrgb-exposure-calculator/src/lrgb-exposure-calculator.js"></script>
 <script>
-  var calc = u235Astrolib.lrgbExposureCalculator.create();
+  var Calc = u235Astrolib.LrgbExposureCalculator;
+  var calc = new Calc();
 </script>
 ```
+
 ### Examples cont.
 
 ##### Calculate RGB exposures given 60s luminance exposure, 2x2 binning, and custom color balance for a given camera and filters:
 ```javascript
-var calc = u235Astrolib.lrgbExposureCalculator.create();
+var Calc = require('u235-astrolib/lrgb-exposure-calculator');
+var calc = new Calc();
 calc.rgbBinning = 2;
 calc.redBalance = 1.62;
 calc.greenBalance = 1;
@@ -35,9 +45,11 @@ console.log(calc.redExposure);    // 72.9
 console.log(calc.greenExposure);  // 45
 console.log(calc.blueExposure);   // 60.3
 ```
+
 ##### Calculate RGB exposures and frame counts given 60s luminance exposure and 40 frames:
 ```javascript
-var calc = u235Astrolib.lrgbExposureCalculator.create();
+var { LrgbExposureCalculator } = require('u235-astrolib');
+var calc = new LrgbExposureCalculator();
 calc.rgbBinning = 2;
 calc.redBalance = 1.62;
 calc.greenBalance = 1;
@@ -51,9 +63,11 @@ console.log(calc.redFrameCount);    // 40
 console.log(calc.greenFraneCount);  // 40
 console.log(calc.blueFrameCount);   // 40
 ```
+
 ##### Calculate RGB frame counts given RGB exposures:
 ```javascript
-var calc = u235Astrolib.lrgbExposureCalculator.create();
+var Calc = require('u235-astrolib/lrgb-exposure-calculator');
+var calc = new Calc();
 calc.commonFrameCountMode = false;
 calc.rgbBinning = 2;
 calc.redBalance = 1.62;
@@ -72,14 +86,18 @@ console.log(calc.greenFrameCount);  // 32.7
 console.log(calc.blueFrameCount);   // 43.9
 ```
 
-## Methods:
-
+##### Subclass the calculator:
 ```javascript
-calc = lrgbExposureCalculator.create();
+var Calc = require('u235-astrolib/lrgb-exposure-calculator');
+function MyCalc(name) {
+  Calc.call(this);
+  this._name = name;
+}
+var calc1 = new MyCalc("Bortle 5");
+var calc2 = new MyCalc("Bortle 4");
 ```
 
-## Instance Methods, from create:
-
+## Instance Methods:
 ```javascript
 number = calc.rgbBinning;           // getter
 calc.rgbBinning = number;           // setter

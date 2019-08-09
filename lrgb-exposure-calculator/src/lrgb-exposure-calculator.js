@@ -1,5 +1,12 @@
-(function(myModule) {
-  function LrgbExposureCalculator() {
+'use strict';
+
+(function() {
+  var root = this.U235Astrolib;
+  if (typeof root === 'undefined') {
+    root = this.U235Astrolib = {};
+  }
+
+  var LrgbExposureCalculator = function() {
     this._redBalance = null;
     this._greenBalance = null;
     this._blueBalance = null;
@@ -9,6 +16,7 @@
     this._commonFrameCountMode = true;
     this._updateDependencies();
   }
+
   LrgbExposureCalculator.prototype = {
     get redBalance() {
       return this._redBalance;
@@ -125,7 +133,13 @@
     }
   };
 
-  myModule.create = function() {
-    return new LrgbExposureCalculator();
-  };
-})(typeof exports === 'undefined' ? (this['u235Astrolib'] = this['u235Astrolib'] || {}).lrgbExposureCalculator = {} : exports);
+  if (typeof exports !== 'undefined') {
+    if (typeof module !== 'undefined' && module.exports) {
+      exports = module.exports = LrgbExposureCalculator;
+    }
+    exports.LrgbExposureCalculator = LrgbExposureCalculator;
+  }
+  else {
+    root.LrgbExposureCalculator = LrgbExposureCalculator;
+  }
+}).call(this);
